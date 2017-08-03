@@ -5,9 +5,14 @@ var app = express();
 var PORT = 3000;
 
 // Needed in order to take post data easily
+// Tell Express to use bodyParser - the post or put body
+// send data over the wire to the server
+// in order to work with it easily, it parses and structures it
 app.use(bodyParser.json());
+// handles url encoding
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
+// take json data sent through post or put
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 var roster = [
