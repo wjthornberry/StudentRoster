@@ -4,6 +4,12 @@ var app = express();
 
 var PORT = 3000;
 
+// Needed in order to take post data easily
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+
 var roster = [
     {
         name: 'Mark'
@@ -32,6 +38,11 @@ app.get('/students/:studentId', function (req, res) {
     res.json(roster[
         // params object is from Express       
         req.params.studentId]);
+});
+
+// post /add
+
+app.post('/add', function (req, res) {
 });
 
 // server listening
