@@ -1,13 +1,16 @@
 // Comment
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 var PORT = 3000;
 
-// Needed in order to take post data easily
+// Needed in order to take post and put data easily
 // Tell Express to use bodyParser - the post or put body
 // send data over the wire to the server
 // in order to work with it easily, it parses and structures it
+// 98% of the time, the below never changes
+// bodyParser is considered middleware
 app.use(bodyParser.json());
 // handles url encoding
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,8 +49,18 @@ app.get('/students/:studentId', function (req, res) {
 });
 
 // post /add
-
 app.post('/add', function (req, res) {
+    // request is inbound information
+    console.log(req.body);
+    // if req.body exists,
+    if (req.body) {
+        // add it to the end of the student roster array
+        // req.body is where the data is
+        roster.push(req.body);
+        res.send('Student added joe!');
+    } else {
+        res.send('You wrong! Enter data next time! Layer 8 issue!');
+    }
 });
 
 // server listening
